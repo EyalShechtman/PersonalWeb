@@ -1,266 +1,339 @@
-/* Ball styling */
-*{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+/* Global font */
+* {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 /* Pickleball field */
 .pickleball-field {
-    width: 580px;  /* Adjust field width as necessary */
-    height: 100px; /* Adjust field height as necessary */
-    background-color: rgb(76, 76, 254);
-    position: absolute;
-    top: -90%; /* Position the field closer to the bottom, simulating the ground */
-    left: 50%;
-    transform: translateX(-50%) translateY(50%) rotateX(100deg) translateZ(-100px); /* Adjust rotation and depth */
-    transform-origin: top center; /* Ensure rotation originates from the top */
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5); /* Stronger shadow for more depth */
-    z-index: -5; /* Ensure it appears behind the ball and goal */
-    perspective: 800px; /* Adding perspective for depth simulation */
-    border-radius: 10%;
+  width: 580px;
+  height: 100px;
+  background-color: rgb(76, 76, 254);
+  position: absolute;
+  top: -90%;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%) rotateX(100deg) translateZ(-100px);
+  transform-origin: top center;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+  z-index: -5;
+  perspective: 800px;
+  border-radius: 10%;
+}
+
+  .soccer {
+    content: url('./public/SoccerPhoto.JPG');
+    height: auto;
+    max-width: 100%;
   }
-    
-  
+
 .ball {
-    width: 50px;
-    height: 50px;
-    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/045/493/238/small_2x/retro-yellow-pickleball-round-ball-sport-accessory-png.png');
-    background-size: cover;
-    position: absolute;
-    top: 50%; /* Starting position of the ball */
-    left: 0;
-    border-radius: 50%;
-    z-index: 2; /* Ensure ball passes over the goal */
-    animation: kickBall 3s cubic-bezier(0.42, 0, 0.58, 1) infinite;
-    /* animation-delay: 1s; */
-  }
+  width: 10vw;
+  height: 10vw;
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/045/493/238/small_2x/retro-yellow-pickleball-round-ball-sport-accessory-png.png');
+  background-size: cover;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-radius: 50%;
+  z-index: 2;
+  animation: kickBall 3s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
 
-  .goal-container {
-    position: absolute;
-    top: 44%;
-    left: 50%;
-    transform: translateX(-50%);
-    perspective: 800px; /* Simulates depth */
-  }
-  
-  /* Goal Frame */
-  .goal {
-    width: 150px;
-    height: 70px;
-    position: relative;
-    border: 5px solid black;
-    background-color: #dcdcdc;
-    background-image:
-      linear-gradient(white 2px, transparent 2px),
-      linear-gradient(90deg, white 2px, transparent 2px);
-    background-size: 15px 15px;
-    transform: rotateX(5deg) rotateY(-50deg); /* Adds 3D tilt */
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-  }
-  
-  /* Left Post */
-  .goal-left {
-    position: absolute;
-    top: 0;
-    left: -5px;
-    width: 5px;
-    height: 70px;
-    background-color: black;
-    transform: translateZ(-70px) rotateY(-50deg); /* Angled to give depth */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
-    z-index:-10;
-  }
-  
-  /* Right Post */
-  .goal-right {
-    position: absolute;
-    top: 0;
-    right: -5px;
-    width: 5px;
-    height: 70px;
-    background-color: black;
-    transform: translateZ(-20px) rotateY(5deg); /* Angled to give depth */
-    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
-  }
-  /* Top Bar */
-  .goal-top {
-    position: absolute;
-    top: -5px;
-    left: 0;
-    width: 150px;
-    height: 5px;
-    background-color: black;
-    transform: translateZ(-20px) rotateX(45deg); /* Angled for depth */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
-  }
-  
-  /* Keyframes for ball animation */
-  @keyframes kickBall {
-    0% {
-      left: 35%;
-      top: 39%;
-      transform: rotate(0deg) scale(0.3);
-    }
-    25% {
-      left: 48%;
-      top: 34%;
-      transform: rotate(180deg) scale(0.4);
-    }
-    50% {
-      left: 62%;
-      top: 40%;
-      transform: rotate(360deg)scale(0.3);
-    }
-    75% {
-        left: 48%;
-        top: 34%;
-        transform: rotate(540deg) scale(0.4);
-    }
-    100% {
-        left: 35%;
-        top: 39%;
-        transform: rotate(720deg) scale(0.3);
-      }
-    }
+/* Goal styling */
+.goal-container {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translateX(-50%);
+  perspective: 800px;
+}
 
+.goal {
+  width: 150px;
+  height: 70px;
+  position: relative;
+  border: 5px solid black;
+  background-color: #dcdcdc;
+  background-image:
+    linear-gradient(white 2px, transparent 2px),
+    linear-gradient(90deg, white 2px, transparent 2px);
+  background-size: 15px 15px;
+  transform: rotateX(5deg) rotateY(-50deg);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
 
+.goal-left {
+  position: absolute;
+  top: 0;
+  left: -5px;
+  width: 5px;
+  height: 70px;
+  background-color: black;
+  transform: translateZ(-70px) rotateY(-50deg);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
 
-  /* Container for the animation */
+.goal-right {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 5px;
+  height: 70px;
+  background-color: black;
+  transform: translateZ(-20px) rotateY(5deg);
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.goal-top {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 150px;
+  height: 5px;
+  background-color: black;
+  transform: translateZ(-20px) rotateX(45deg);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Keyframes for ball animation */
+@keyframes kickBall {
+  0% {
+    left: 35%;
+    top: 39%;
+    transform: rotate(0deg) scale(0.1);
+  }
+  25% {
+    left: 48%;
+    top: 34%;
+    transform: rotate(180deg) scale(0.2);
+  }
+  50% {
+    left: 62%;
+    top: 40%;
+    transform: rotate(360deg) scale(0.1);
+  }
+  75% {
+    left: 48%;
+    top: 34%;
+    transform: rotate(540deg) scale(0.2);
+  }
+  100% {
+    left: 35%;
+    top: 39%;
+    transform: rotate(720deg) scale(0.1);
+  }
+}
+
+/* Animation containers */
 .animation-container {
-    width: 100px;
-    height: 150px;
-    margin: 0 auto;
-    position: relative;
-  }
-  
-  /* Animate the person hitting the ball */
-  .person-animation {
-    width: 90%;
-    left: -275%;
-    top: 222%;
-    position: absolute;
-    animation: hitAnimation 1s steps(3) infinite; /* Cycle through 3 images */
-    z-index: 3;
+  width: 100px;
+  height: 150px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.person-animation {
+  width: 90%;
+  left: -275%;
+  top: 222%;
+  position: absolute;
+  animation: hitAnimation 1s steps(3) infinite;
+  z-index: 3;
 }
 
 .person-animation2 {
-    width: 90%;
-    left: 290%;
-    top: 222%;
-    position: absolute;
-    animation: hitAnimation2 1s steps(3) infinite; /* Cycle through 3 images */
-    z-index: 3;
-
+  width: 90%;
+  left: 290%;
+  top: 222%;
+  position: absolute;
+  animation: hitAnimation2 1s steps(3) infinite;
+  z-index: 3;
 }
 
 @keyframes hitAnimation2 {
-    0% {
-      content: url('./public/person1\ copy.png');
-      z-index: 3;
-    }
-    33% {
-        content: url('./public/person2\ copy.png');
-        z-index: 3;
-    }
-    66% {
-        content: url('./public/person3\ copy.png');
-        z-index: 3;
-        transform: scale(1.1);
-    }
-    100% {
-        content: url('./public/person1\ copy.png');
-        animation-delay: 10s;
-        z-index: 3;
-    }
+  0% {
+    content: url('./public/person1\ copy.png');
+    z-index: 3;
   }
-
-  /* Keyframes for the hit animation */
-  @keyframes hitAnimation {
-    0% {
-      content: url('./public/person1.png');
-      z-index: 3;
-
-    }
-    33% {
-        content: url('./public/person2.png');
-        z-index: 3;
-
-    }
-    66% {
-        content: url('./public/person3.png');
-        z-index: 3;
-        transform: scale(1.1);
-    }
-    100% {
-        content: url('./public/person1.png');
-        z-index: 3;
-
-        animation-delay: 10s;
-    }
+  33% {
+    content: url('./public/person2\ copy.png');
+    z-index: 3;
   }
-
-  .soccer{
-    content: url('./public/SoccerPhoto.JPG');
-    height: 250px;
-    align-items: 'right';
-    align-content:end;
-  }
-
-
-  .project-1{
-    content: url('./public/SPB.webp');
-  }
-  .projectpicture-1{
-    content: url('./public/SPBApp.png');
-  }
-
-  .project-3{
-    content: url('./public/DubMatch1.png');
-  }
-  .projectpicture-3{
-    content: url('./public/DubMatch2.png');
-  }
-
-  .project-2{
-    content: url('./public/Congress.png');
-  }
-  .projectpicture-2{
-    content: url('./public/CongressPlot.png');
-  }
-
-  .project-4{
-    content: url('./public/TryOn1.png');
-  }
-  .projectpicture-4{
-    content: url('./public/TryOn2.png');
-  }
-  .project-5{
-    content: url('./public/Research.png');
-  }
-  .projectpicture-5{
-    content: url('./public/ResearchPic3.png');
-  }
-
-  .nav:hover{
-    text-decoration: underline;
-    color: blue;
-  }
-
-  .project-circle:hover{
+  66% {
+    content: url('./public/person3\ copy.png');
+    z-index: 3;
     transform: scale(1.1);
   }
-
-  .github{
-    content: url('./public/github.png');
+  100% {
+    content: url('./public/person1\ copy.png');
+    animation-delay: 10s;
+    z-index: 3;
   }
-  .github2{
-    content: url('./public/github.png');
-    width: 25px;
-    height: 25px;
+}
+
+@keyframes hitAnimation {
+  0% {
+    content: url('./public/person1.png');
+    z-index: 3;
+  }
+  33% {
+    content: url('./public/person2.png');
+    z-index: 3;
+  }
+  66% {
+    content: url('./public/person3.png');
+    z-index: 3;
+    transform: scale(1.1);
+  }
+  100% {
+    content: url('./public/person1.png');
+    animation-delay: 10s;
+    z-index: 3;
+  }
+}
+
+/* Project images */
+.project-1 {
+  content: url('./public/SPB.webp');
+}
+
+.projectpicture-1 {
+  content: url('./public/SPBApp.png');
+}
+
+.project-3 {
+  content: url('./public/DubMatch1.png');
+}
+
+.projectpicture-3 {
+  content: url('./public/DubMatch2.png');
+}
+
+.project-2 {
+  content: url('./public/Congress.png');
+}
+
+.projectpicture-2 {
+  content: url('./public/CongressPlot.png');
+}
+
+.project-4 {
+  content: url('./public/TryOn1.png');
+}
+
+.projectpicture-4 {
+  content: url('./public/TryOn2.png');
+}
+
+.project-5 {
+  content: url('./public/Research.png');
+}
+
+.projectpicture-5 {
+  content: url('./public/ResearchPic3.png');
+}
+
+/* Links */
+.nav:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+.project-circle:hover {
+  transform: scale(1.1);
+}
+
+.github {
+  content: url('./public/github.png');
+}
+
+.github2 {
+  content: url('./public/github.png');
+  width: 25px;
+  height: 25px;
+}
+
+.linkedin {
+  content: url('./public/image copy.png');
+  height: 40px;
+  width: 40px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  /* Project grid to single column */
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .linkedin{
-    content: url('./public/image copy.png');
-    height: 40px;
-    width: 40px;
-
+  /* Responsive pickleball field */
+  .pickleball-field {
+    width: 90%;
+    height: auto;
+    top: -50%;
   }
+
+  /* Adjust animations */
+  .person-animation,
+  .person-animation2 {
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Soccer image adjustments */
+  /* Responsive goal */
+  .goal-container {
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Ball responsive size */
+  .ball {
+    width: 10vw;
+    height: 10vw;
+  }
+
+  /* Typography adjustments */
+  h1 {
+    font-size: 28px;
+  }
+
+  .header {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .paragraph {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .contentWrapper {
+    display: block;
+    padding: 20px;
+  }
+
+  .imageWrapper {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .currentlyBox {
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  /* Expanded project on mobile */
+  .expandedProjectCircle {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+  }
+
+  /* Close button size */
+  .closeButton {
+    font-size: 20px;
+  }
+}

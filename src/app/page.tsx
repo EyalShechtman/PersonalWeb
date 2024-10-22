@@ -1,23 +1,24 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Navbar from './components/navbar';
 import './styles.css';
 import InterestsAndContactSections from './components/InterestsAndContactSections';
-import GithubRequest from './components/Request';
 import Contact from './components/Contact';
-
 
 export default function Home() {
   const [currentTime, setCurrentTime] = useState<string>('');
   const [currentDay, setCurrentDay] = useState<string>('');
   const [age, setAge] = useState<number>(0);
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
+  const [ProjectDetailsComponent, setProjectDetailsComponent] = useState<React.FC | null>(null); // Moved inside the component
 
   // Your birthdate (replace with your actual birthdate)
   const birthDate = new Date('2004-09-12');
+  
   const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation(); // Prevent click from propagating to the parent
     setExpandedProject(null); // Collapse the expanded project
+    setProjectDetailsComponent(null); // Clear the components
   };
 
   useEffect(() => {
@@ -28,7 +29,6 @@ export default function Home() {
       const dayString = now.toLocaleDateString(undefined, {
         weekday: 'long', // 'Monday', 'Tuesday', etc.
       });
-      const currentDate = Date.now();
 
       setCurrentTime(timeString);
       setCurrentDay(dayString);
@@ -47,22 +47,29 @@ export default function Home() {
     return () => clearInterval(intervalId);
   }, [birthDate]);
 
-
   const projectData = [
-    { id: 1, title: "Sammamish PickleBall", description: "Developed and launched a Pickleball attendance app for the city of Sammamish, which has successfully attracted over 50 daily users and accumulated more than 150 total downloads. With plans to globalize the app, I utilized a Swift and Firebase stack to create a seamless user experience. The positive reception highlights its potential for broader engagement within the Pickleball community.", photo: './public/SPB.webp', github: 'https://github.com/EyalShechtman/SammamishPickleBall-App'},
-    { id: 2, title: "US Congress API", description: "Identifying the absence of an available API for congressional voting information, I took the initiative to develop a comprehensive RESTful API using Flask. To ensure scalability and reliability, I deployed the API through AWS and Docker, optimizing it for robust performance. This custom-built API was specifically tailored to meet the needs of a project that analyzed and mapped the voting records of the 117th Congress concerning their stances on Israel. By creating specialized endpoints, the API enabled efficient data retrieval and facilitated detailed insights into how each member of Congress voted on key issues related to Israel, thereby providing a clear and informative visualization of legislative positions based on their voting behavior. Link for Project: https://github.com/EyalShechtman/Congress_Israel_Bills", photo: './public/SPB.webp', github: 'https://github.com/EyalShechtman/CongressAPI'},
-    { id: 3, title: "DubMatch", description: "Developed a full-stack website using React for the frontend and Firebase for the backend with the objective of simplifying the roommate search process for University of Washington (UW) students. The platform offers comprehensive features, ranging from user authorization to advanced filtering options, allowing users to find prospective roommates with more precise and concrete criteria than typical roommate websites. By implementing detailed filters, the website ensures that students can match based on specific preferences and needs, enhancing the compatibility and overall roommate experience. Additionally, the site is tailored specifically for the UW campus, incorporating campus-specific information and resources to better serve the student community. This targeted approach not only facilitates easier and more effective roommate matching but also fosters a more connected and supportive living environment for UW students.", photo: './public/SPB.webp', github: 'https://github.com/EyalShechtman/UW-Roomate-App-React-'},
-    { id: 4, title: "Nike Virtual Try-On Extension", description: "Currently developing an AI-powered virtual fitting Chrome extension designed to enhance the online shopping experience on the Nike website. This React-based extension features a personalized virtual fitting tool that utilizes Selenium to scrape product data and interact with Alibaba’s fitting model. Additionally, using a pre-built head swapping model, using PyTorch and OpenCV, I enabled face personalization by blending user images onto the virtual mannequins. This ongoing project aims to provide users with a highly personalized and interactive shopping experience by integrating advanced AI technologies into a user-friendly browser extension.", photo: './public/SPB.webp', github: 'https://github.com/EyalShechtman/VirtualFittingExtension'},
-    { id: 5, title: "Research", description: "I developed and published a Chrome extension designed to contextualize news headlines, enhancing user understanding through advanced text analysis. Utilizing the OpenAI API for text summarization and SpaCy for keyword extraction, the extension provides concise summaries and highlights key terms from news articles in real time. The backend is hosted on AWS EC2, where I deployed a REST API endpoint to efficiently handle requests from the extension. The user interface, crafted with JavaScript, HTML, and CSS, ensures seamless and interactive user experiences directly within the browser. Additionally, I authored a paper detailing this project, which is on track for publication as the first author by December 2024 at NCUR-2025.", photo: './public/SPB.webp', github: 'https://github.com/EyalShechtman'},
+    { id: 1, title: "Sammamish PickleBall", description: "Developed and launched a Pickleball attendance app for the city of Sammamish...", photo: './public/SPB.webp', github: 'https://github.com/EyalShechtman/SammamishPickleBall-App' },
+    { id: 2, title: "US Congress API", description: "Identifying the absence of an available API for congressional voting information...", photo: './public/SPB.webp', github: 'https://github.com/EyalShechtman/CongressAPI' },
+    // Add other projects here...
   ];
-  
+
+  const projectData2 = [
+    { id: 1, title: "Sammamish PickleBall", component: 'SPB' },
+    // Add more components for other projects...
+  ];
+
+  const loadProjectDetails = (project: any) => {
+    if (project.component) {
+      import(`./components/projects/${project.component}`).then((Component) => {
+        setProjectDetailsComponent(() => Component.default);
+        setExpandedProject(project.id);
+      });
+    }
+  };
+
   return (
-    
     <div>
-
-
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,447;1,447&display=swap"/>
-
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,447;1,447&display=swap" />
 
       <div className="animation-container">
         <img className="person-animation" src="./public/person1.png" alt="Person Hitting" />
@@ -76,20 +83,18 @@ export default function Home() {
         <div className="goal-right"></div>
         <div className="goal-top"></div>
       </div>
+      </div>
 
-
-    </div>
       <div className='ball'></div>
-      <h1 style={styles.name}>Eyal Shechtman</h1>
 
+      <h1 style={styles.name}>Eyal Shechtman</h1>
       <p style={styles.time}>{currentDay}, {currentTime}</p>
       <p style={styles.time}>Age: {age}</p>
 
       <Navbar />
-
       <div className='movingElement'></div>
 
-      {/* About Section */}
+      
       <section id="about" style={sectionStyles}>
         <div style={styles.contentWrapper}>
           <div style={styles.textContainer}>
@@ -116,7 +121,7 @@ export default function Home() {
 
           <div style={styles.imageWrapper}>
             <img className="soccer" src="./public/SoccerPhoto.JPG" alt="Eyal Doing what he loves best" style={styles.image} />
-            <p style={styles.caption}>Playing footy!</p>
+            <p style={styles.caption}>Playing FOOTY!</p>
           </div>
         </div>
       </section>
@@ -124,37 +129,37 @@ export default function Home() {
       {/* Projects Section */}
       <section id="projects" style={sectionStyles2}>
         <h1 className="projects-header" style={styles.projectsHeader}>Projects</h1>
-        <div style={styles.projectsGrid}>
+        <div className="projectsGrid" style={styles.projectsGrid}>
           {projectData.map((project) => (
             <div
               key={project.id}
-              className={`project-circle ${project.id === expandedProject ? 'expanded' : ''}` }
+              className={`project-circle ${project.id === expandedProject ? 'expanded' : ''}`}
               style={expandedProject === project.id ? styles.expandedProjectCircle : styles.projectCircle}
-              onClick={() => setExpandedProject(project.id)}
+              onClick={() => loadProjectDetails(projectData2.find((p) => p.id === project.id))}
             >
               <div style={styles.projectContent}>
                 {expandedProject === project.id ? (
-                <>
-                  <div style={styles.titleContainer}>
-                    <h1 style={styles.header}>{project.title}</h1>
-                    {/* GitHub icon linked to project GitHub repository */}
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" style={styles.githubLink}>
-                      <img className='github'
-                        src="./public/github.png" // Use your GitHub icon image path
-                        alt="GitHub"
-                        style={styles.githubIcon}
-                      />
-                    </a>
-                  </div>
-                  <p style={styles.paragraph}>{project.description}</p>
-                  <img className={`projectpicture-${project.id}`} src={project.photo} alt={project.title} style={styles.expandedImage} />
-                  <button style={styles.closeButton} onClick={handleClose}>
-                    &times;
-                  </button>
-                </>
-              ) : (
                   <>
-                    <img className = {`project-${project.id}`} src={project.photo} alt={project.title} style={styles.projectImage} />
+                    {/* <div style={styles.titleContainer}>
+                      <h1 style={styles.header}>{project.title}</h1>
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" style={styles.githubLink}>
+                        <img className="github" src="./public/github.png" alt="GitHub" style={styles.githubIcon} />
+                      </a>
+                    </div> */}
+                    {/* <p style={styles.paragraph}>{project.description}</p>
+                    <img className={`projectpicture-${project.id}`} src={project.photo} alt={project.title} style={styles.expandedImage} /> */}
+                    {ProjectDetailsComponent && (
+                      <Suspense fallback={<div>Loading...</div>}>
+                        <ProjectDetailsComponent />
+                      </Suspense>
+                    )}
+                    <button style={styles.closeButton} onClick={handleClose}>
+                      &times;
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <img className={`project-${project.id}`} src={project.photo} alt={project.title} style={styles.projectImage} />
                     <p>{project.title}</p>
                   </>
                 )}
@@ -163,6 +168,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+
       {/* Interest Section */}
       <section id="interest" style={sectionStyles2}>
         <InterestsAndContactSections />
@@ -170,7 +176,7 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" style={sectionStyles2}>
-        <Contact/>
+        <Contact />
       </section>
     </div>
   );
@@ -363,7 +369,7 @@ const sectionStyles2: React.CSSProperties = {
   flexDirection: 'column',   // Stack items vertically
   justifyContent: 'center',  // Center content horizontally
   alignItems: 'left',      // Center content vertically
-  height: '73vh',           // Full height of the viewport
+  height: '80vh',           // Full height of the viewport
   padding: '50px 0',
   backgroundColor: '#f4f1e0',
   textAlign: 'left',       // Centers text inside the section

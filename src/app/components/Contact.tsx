@@ -36,7 +36,7 @@ const Contact: React.FC = () => {
           <ContactBox
             icon={<p className="linkedin"></p>}
             text="LinkedIn"
-            link="https://www.linkedin.com/in/your-profile"
+            link="https://www.linkedin.com/in/eyal-shechtman"
           />
           <ContactBox
             icon={<p className="github2">✉️</p>}

@@ -35,24 +35,21 @@ interface ContactBoxProps {
 
 const InterestsAndContactSections: React.FC = () => {
   const excitementData: ExcitementBoxProps[] = [
-    { icon: "🤖", text: "Claude 3.5 Opus" },
     { icon: "🧠", text: "GPT 5" },
-    { icon: "🏡", text: "Move into a new house" },
-    { icon: "🤝", text: "Meet people at work" },
-    { icon: "👀", text: "See how AI progress unfolds" },
-    { icon: "⚖️", text: "Find out what new AI jobs exist" },
-    { icon: "🎓", text: "AI providing equal access to highest level education" },
-    { icon: "⛳", text: "Become a scratch golfer" },
+    { icon: "🤝", text: "Connect with Industry Leaders" },
+    { icon: "👀", text: "LLM Poker Helper" },
+    { icon: "🎶", text: "Seeing how AI changes Music" },
+    { icon: "⚽️", text: "Sign a pro contract" },
     { icon: "🚀", text: "Start a company" }
   ];
 
   const interestsData: InterestBoxProps[] = [
-    { image: "golf.jpg", title: "Golf", description: "Only sport I don't get embarrassed in" },
-    { image: "videogames.jpg", title: "Video Games", description: "Make millions of coins in ultimate team game modes" },
-    { image: "boardgames.jpg", title: "Board Games", description: "Strategy is the best" },
-    { image: "placeholder.jpg", title: "Placeholder", description: "Description for the fourth interest" }
+    { image: "/person1 copy.png", title: "Soccer", description: "There's a reason why it's the most popular sport" },
+    { image: "/SoccerPhoto.JPG", title: "Chess", description: "Ruy Lopes till I die" },
+    { image: "/DubMatch1.png", title: "Poker", description: "All In with 2-7 Offsuit" },
+    { image: "/placeholder.jpg", title: "Piano", description: "The father of all instruments" }
   ];
-
+  
   return (
     <>
       <section id="interests" className="bg-[#f4f1e0] py-12">
